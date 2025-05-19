@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.navbar-spacer{
+  flex: 1 1 auto;
+}
+.container{
+  padding: 10px;
+}
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+.error-message {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+}
+.snackbar-below-navbar{
+  margin-top: 75px !important;
+}
+.success-snackbar {
+  --mdc-snackbar-container-color: #22c55e;
+  --mat-snack-bar-button-color: #dcfce7;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #ef4444;
+  --mat-snack-bar-button-color: #fee2e2;
+}
+.dialog-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.full-width{
+  width: 100%;
+}
