@@ -1,0 +1,16 @@
+.navbar-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  margin-right: 8px;
+}
+
+.mat-icon {
+  margin-right: 4px;
+}

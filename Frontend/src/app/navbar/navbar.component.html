@@ -1,23 +1,32 @@
 <mat-toolbar color="primary">
   <span>E-banking</span>
   <span class="navbar-spacer"></span>
-  <button mat-button routerLink="/admin/home">
-    Home
+  <button mat-button routerLink="/home">
+    <mat-icon>home</mat-icon> Accueil
   </button>
 
-  <button mat-button [matMenuTriggerFor]="customerMenu">
-    <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
-    Customers
+  <button mat-button [matMenuTriggerFor]="clientMenu">
+    <mat-icon>people</mat-icon> Clients
+    <mat-icon>arrow_drop_down</mat-icon>
   </button>
-  <mat-menu #customerMenu>
-    <button mat-menu-item routerLink="/admin/customers" disableRipple>All customers</button>
-    <button mat-menu-item *ngIf="authService.roles.includes('ADMIN')" disableRipple>New customer</button>
+  <mat-menu #clientMenu>
+    <button mat-menu-item routerLink="/clients">Liste des clients</button>
+    <button mat-menu-item routerLink="/clients/new">Nouveau client</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="creditMenu">
+    <mat-icon>account_balance</mat-icon> Crédits
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  <mat-menu #creditMenu>
+    <button mat-menu-item routerLink="/credits">Liste des crédits</button>
+    <button mat-menu-item routerLink="/credits/new">Nouveau crédit</button>
   </mat-menu>
 
   <span class="navbar-spacer"></span>
   <div>
     <button mat-button *ngIf="authService.isAuthenticated">
-      <mat-icon iconPositionEnd>account_circle</mat-icon>
+      <mat-icon>account_circle</mat-icon>
       {{authService.username}}
     </button>
   </div>
@@ -25,7 +34,3 @@
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
-
-<div style="min-height: 600px;background-color: #f9fafb" class="container">
-  <router-outlet></router-outlet>
-</div>

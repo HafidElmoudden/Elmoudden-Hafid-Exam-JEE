@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/remboursements")
+@RequestMapping("/remboursements")
 @Tag(name = "Remboursement API", description = "Operations related to remboursement management")
 @CrossOrigin("*")
 public class RemboursementRestController {

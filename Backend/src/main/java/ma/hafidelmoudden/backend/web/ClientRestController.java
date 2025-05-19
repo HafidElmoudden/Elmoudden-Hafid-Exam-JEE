@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/clients")
+@RequestMapping("/clients")
 @Tag(name = "Client API", description = "Operations related to client management")
 @CrossOrigin("*")
 public class ClientRestController {

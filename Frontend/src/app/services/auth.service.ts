@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +18,18 @@ export class AuthService {
 
   constructor(private http:HttpClient,private router:Router) { }
 
-  public login(username: string, password: string){
+  public login(credentials: {username: string, password: string}): Observable<any> {
     let options = {
-      headers:new HttpHeaders({}).set("Content-type", "application/x-www-form-urlencoded")
+      headers: new HttpHeaders().set("Content-type", "application/x-www-form-urlencoded")
     };
-    let params=new HttpParams().set('username', username).set('password', password);
-    return this.http.post(environment.backendHost+"/auth/login", params, options);
-
+    let params = new HttpParams()
+      .set('username', credentials.username)
+      .set('password', credentials.password);
+    
+    return this.http.post(environment.apiUrl + "/auth/login", params, options)
+      .pipe(
+        tap(data => this.loadProfile(data))
+      );
   }
 
   public logout(){
@@ -55,7 +62,7 @@ export class AuthService {
     if(token){
       this.loadProfile({ 'access-token': token });
       console.log("Token loaded from local storage:", token);
-      //this.router.navigateByUrl('/admin/customers').then();
+      //this.router.navigateByUrl('/home').then();
     }
   }
 }

@@ -1,0 +1,64 @@
+<div class="container mt-4">
+  <div *ngIf="credit" class="mb-4">
+    <h2>Remboursements du crédit #{{ credit.id }}</h2>
+    <p>Montant total: {{ credit.montant | currency:'EUR':'symbol':'1.2-2' }}</p>
+    <p>Taux: {{ credit.tauxInteret | percent:'1.2-2' }}</p>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col text-end">
+      <a [routerLink]="['/admin/credits', creditId, 'remboursements', 'new']" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Nouveau Remboursement
+      </a>
+      <a [routerLink]="['/admin/credits']" class="btn btn-secondary ms-2">
+        <i class="bi bi-arrow-left"></i> Retour aux Crédits
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && remboursements.length === 0" class="alert alert-info">
+    Aucun remboursement trouvé pour ce crédit.
+  </div>
+
+  <div *ngIf="!loading && remboursements.length > 0" class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Montant</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let remboursement of remboursements">
+          <td>{{ remboursement.id }}</td>
+          <td>{{ remboursement.date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ remboursement.montant | currency:'EUR':'symbol':'1.2-2' }}</td>
+          <td>{{ getTypeLabel(remboursement.type) }}</td>
+          <td>
+            <div class="btn-group">
+              <a [routerLink]="['/admin/credits', creditId, 'remboursements', remboursement.id, 'edit']" class="btn btn-sm btn-warning">
+                <i class="bi bi-pencil"></i> Modifier
+              </a>
+              <button (click)="deleteRemboursement(remboursement.id!)" class="btn btn-sm btn-danger ms-1">
+                <i class="bi bi-trash"></i> Supprimer
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> 

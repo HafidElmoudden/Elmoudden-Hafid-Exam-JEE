@@ -1,19 +1,29 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {AuthService} from '../services/auth.service';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
-  standalone: false,
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule
+  ]
 })
-export class NavbarComponent implements OnInit{
-  constructor(public authService:AuthService,private router:Router) { }
+export class NavbarComponent {
+  constructor(public authService: AuthService) { }
 
-  ngOnInit(): void {
-    // Initialization logic can go here
-  }
   handleLogout() {
     this.authService.logout();
   }

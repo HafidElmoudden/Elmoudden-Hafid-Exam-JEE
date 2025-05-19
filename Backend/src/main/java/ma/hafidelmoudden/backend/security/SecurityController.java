@@ -37,7 +37,7 @@ public class SecurityController {
         Instant instant=Instant.now();
         String scope=authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "));
         JwtClaimsSet jwtClaimsSet=JwtClaimsSet.builder()
-                .issuer("http://localhost:8085")
+                .issuer("http://localhost:8080")
                 .issuedAt(instant)
                 .expiresAt(instant.plus(10, ChronoUnit.MINUTES))
                 .subject(username)
