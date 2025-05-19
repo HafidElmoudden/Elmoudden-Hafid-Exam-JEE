@@ -1,5 +1,7 @@
 package ma.hafidelmoudden.backend;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import ma.hafidelmoudden.backend.entities.*;
 import ma.hafidelmoudden.backend.enums.Statut;
 import ma.hafidelmoudden.backend.enums.TypeBien;
@@ -16,6 +18,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "Bank Credit Management API", version = "1.0"))
 public class BackendApplication {
 
     public static void main(String[] args) {
@@ -35,7 +38,7 @@ public class BackendApplication {
             System.out.println("=== Starting DAO Layer Test ===");
             
             // Create clients
-            Stream.of("Imad", "Hassan", "Saaid").forEach(name -> {
+            Stream.of("Client1", "Client2", "Client3").forEach(name -> {
                 Client client = new Client();
                 client.setNom(name);
                 client.setEmail(name.toLowerCase() + "@gmail.com");
@@ -144,6 +147,9 @@ public class BackendApplication {
             });
             
             System.out.println("=== DAO Layer Test Completed ===");
+            
+            System.out.println("=== Swagger UI available at: http://localhost:8080/swagger-ui ===");
+            System.out.println("=== API Docs available at: http://localhost:8080/api-docs ===");
         };
     }
 }
